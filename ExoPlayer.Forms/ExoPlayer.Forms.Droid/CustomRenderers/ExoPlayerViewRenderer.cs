@@ -66,7 +66,7 @@ namespace ExoPlayer.Forms.Droid.CustomRenderers
             if (e.PropertyName == "VideoSource")
             {
 
-                _uri = Android.Net.Uri.Parse(((ExoPlayer.Forms.Views.ExoPlayer)sender).VideoSource);
+                _uri = Android.Net.Uri.Parse(((Views.ExoPlayer)sender).VideoSource);
 
                 InitializePlayer();
             }

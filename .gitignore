@@ -3,3 +3,8 @@
 ################################################################################
 
 /ExoPlayer.Forms/ExoPlayer.Forms/bin/Debug
+/ExoPlayer.Forms/ExoPlayer.Forms/obj
+/ExoPlayer.Forms/ExoPlayer.Forms.Droid/bin/Debug
+/ExoPlayer.Forms/ExoPlayer.Forms.Droid/obj
+/packages/Xam.Plugins.Android.ExoPlayer.1.5.10
+/packages
