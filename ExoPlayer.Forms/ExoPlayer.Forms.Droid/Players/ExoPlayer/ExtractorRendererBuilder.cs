@@ -18,12 +18,17 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Media;
-using Com.Google.Android.Exoplayer;
-using Com.Google.Android.Exoplayer.Audio;
-using Com.Google.Android.Exoplayer.Extractor;
-using Com.Google.Android.Exoplayer.Text;
-using Com.Google.Android.Exoplayer.Upstream;
-using Com.Google.Android.Exoplayer.Util;
+using Com.Google.Android.Exoplayer2;
+using Com.Google.Android.Exoplayer2.Audio;
+using Com.Google.Android.Exoplayer2.Extractor;
+using Com.Google.Android.Exoplayer2.Text;
+using Com.Google.Android.Exoplayer2.Upstream;
+using Com.Google.Android.Exoplayer2.Util;
+using Com.Google.Android.Exoplayer2.Extractor;
+using Com.Google.Android.Exoplayer2.Mediacodec;
+using Com.Google.Android.Exoplayer2.Upstream;
+using Com.Google.Android.Exoplayer2.Util;
+using MediaCodecInfo = Com.Google.Android.Exoplayer2.Mediacodec.MediaCodecInfo;
 using Uri = Android.Net.Uri;
 
 namespace Afaq.IPTV.Droid.Players.ExoPlayer
@@ -51,7 +56,7 @@ namespace Afaq.IPTV.Droid.Players.ExoPlayer
 		{
 			var allocator = new DefaultAllocator(BufferSegmentSize);
 		    var codecSelector = MediaCodecSelector.Default;
-            List<DecoderInfo> DecoderInfos = new List<DecoderInfo>();
+            var DecoderInfos = new List<MediaCodecInfo>();
             DecoderInfos.Add(MediaCodecUtil.GetDecoderInfo(MimeTypes.VideoMp4,false));
             DecoderInfos.Add(MediaCodecUtil.GetDecoderInfo(MimeTypes.ApplicationMp4, false));
             DecoderInfos.Add(MediaCodecUtil.GetDecoderInfo(MimeTypes.VideoH263, false));
@@ -117,7 +122,7 @@ namespace Afaq.IPTV.Droid.Players.ExoPlayer
         }
 
         public IntPtr Handle { get; }
-        public DecoderInfo GetDecoderInfo(string mimeType, bool requiresSecureDecoder)
+        public MediaCodecInfo GetDecoderInfo(string mimeType, bool requiresSecureDecoder)
         {
             if (!mimeType.Equals("video/mp4")) {
                 // Default behavior.
@@ -130,10 +135,6 @@ namespace Afaq.IPTV.Droid.Players.ExoPlayer
             return allDecoders;
         }
 
-        public string PassthroughDecoderName { get; }
-
-
-
-
+        public MediaCodecInfo PassthroughDecoderInfo { get; }
     }
 }

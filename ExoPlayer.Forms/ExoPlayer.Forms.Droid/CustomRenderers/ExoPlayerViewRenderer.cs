@@ -1,11 +1,11 @@
 using System;
 using System.ComponentModel;
-using Afaq.IPTV.Droid.Players.ExoPlayer;
+using Android.App;
 using Android.Views;
-using Com.Google.Android.Exoplayer.Util;
 using ExoPlayer.Forms.Droid.CustomRenderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Resource = ExoPlayer.Forms.Droid.Resources.Resource;
 using View = Xamarin.Forms.View;
 
 [assembly: ExportRenderer(typeof(ExoPlayer.Forms.Views.ExoPlayer), typeof(ExoPlayerViewRenderer))]
@@ -17,8 +17,8 @@ namespace ExoPlayer.Forms.Droid.CustomRenderers
     /// </summary>
     public class ExoPlayerViewRenderer : ViewRenderer
     {
-        private VideoPlayer _player;
         private Android.Net.Uri _uri;
+        private Android.Views.View _view;
 
         /// <summary>
         /// Used for registration with dependency service
@@ -26,37 +26,16 @@ namespace ExoPlayer.Forms.Droid.CustomRenderers
         public void Init()
         {
 
-        }
-
-
+        }  
 
         protected override void OnElementChanged(ElementChangedEventArgs<View> e)
         {
             base.OnElementChanged(e);
- 
-            var player = Element as Views.ExoPlayer;
 
-            if ((player != null) && (e.OldElement == null))
-            {
-                var metrics = Resources.DisplayMetrics;
+            var activity = this.Context as Activity;
+            _view = activity.LayoutInflater.Inflate(Resource.Layout.playeractivity, this, false);
 
-                player.HeightRequest = metrics.WidthPixels / metrics.Density / player.VideoScale;
-
-
-            }
-        }
-
-        private void OnRelease(object sender, EventArgs e)
-        {
-            _player.Release();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            _player.Release();
-            _player.Dispose();
-            GC.Collect();
+            AddView(_view);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -66,43 +45,26 @@ namespace ExoPlayer.Forms.Droid.CustomRenderers
             if (e.PropertyName == "VideoSource")
             {
 
-                _uri = Android.Net.Uri.Parse(((Views.ExoPlayer)sender).VideoSource);
+//                _uri = Android.Net.Uri.Parse(((Views.ExoPlayer)sender).VideoSource);
 
-                InitializePlayer();
             }
-
         }
 
-        private void InitializePlayer()
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
-            if (_player != null)
-            {
-                _player.Release();
-                _player.Dispose();
-            }
-
-            SurfaceView surfaceView = new SurfaceView(Context);
-            _player = new VideoPlayer(GetRendererBuilder(_uri), Context);
-            _player.RefreshPlayer += _player_RefreshPlayer;
-            _player.Prepare();
-            _player.PlayWhenReady = true;
-            _player.Surface = surfaceView.Holder.Surface;
-
-            SetNativeControl(surfaceView);
+            base.OnLayout(changed, l, t, r, b);
+            var msw = MeasureSpec.MakeMeasureSpec(r - l, MeasureSpecMode.Exactly);
+            var msh = MeasureSpec.MakeMeasureSpec(b - t, MeasureSpecMode.Exactly);
+            _view.Measure(msw, msh);
+            _view.Layout(0, 0, r - l, b - t);
         }
 
-        private void _player_RefreshPlayer(object sender, EventArgs e)
+        protected override void Dispose(bool disposing)
         {
-            var player = (VideoPlayer)sender;
-            player.RefreshPlayer -= _player_RefreshPlayer;
-
-            InitializePlayer();
-        }
-
-        private VideoPlayer.IRendererBuilder GetRendererBuilder(Android.Net.Uri uri)
-        {
-            var userAgent = ExoPlayerUtil.GetUserAgent(Context, "ExoPlayerDemo");
-            return new ExtractorRendererBuilder(Context, userAgent, uri);
+            base.Dispose(disposing);
+//            _player.Release();
+//            _player.Dispose();
+            GC.Collect();
         }
     }
 }
