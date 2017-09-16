@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using ExoPlayer.Forms.Droid.Resources;
 
 namespace ExoPlayer.Forms.Droid
 {

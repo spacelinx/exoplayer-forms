@@ -34,7 +34,6 @@ using Com.Google.Android.Exoplayer2.Trackselection;
 using Com.Google.Android.Exoplayer2.UI;
 using Com.Google.Android.Exoplayer2.Upstream;
 using ExoPlayer.Forms.Droid.Helpers;
-using ExoPlayer.Forms.Droid.Resources;
 using Java.Lang;
 using Java.Net;
 using Java.Util;

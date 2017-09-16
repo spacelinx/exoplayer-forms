@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("ExoPlayer.Forms.Droid.Resource", IsApplication=true)]
 
-namespace ExoPlayer.Forms.Droid.Resources
+namespace ExoPlayer.Forms.Droid
 {
 	
 	
@@ -26,7 +26,7 @@ namespace ExoPlayer.Forms.Droid.Resources
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::ExoPlayer.Forms.Droid.Resources.Resource.Attribute.actionBarSize;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::ExoPlayer.Forms.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation

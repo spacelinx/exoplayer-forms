@@ -25,7 +25,6 @@ using Android.Widget;
 using Com.Google.Android.Exoplayer2;
 using Com.Google.Android.Exoplayer2.Source;
 using Com.Google.Android.Exoplayer2.Trackselection;
-using ExoPlayer.Forms.Droid.Resources;
 using Java.Lang;
 
 namespace ExoPlayer.Forms.Droid.Helpers

@@ -5,7 +5,6 @@ using Android.Views;
 using ExoPlayer.Forms.Droid.CustomRenderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Resource = ExoPlayer.Forms.Droid.Resources.Resource;
 using View = Xamarin.Forms.View;
 
 [assembly: ExportRenderer(typeof(ExoPlayer.Forms.Views.ExoPlayer), typeof(ExoPlayerViewRenderer))]
